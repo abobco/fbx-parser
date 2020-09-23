@@ -1,3 +1,12 @@
+/* 
+    By Austin Bobco 9/22/2020
+
+    Written using info from this article
+    https://code.blender.org/2013/08/fbx-binary-file-format-specification/
+
+    WIP
+*/
+
 // gcc linked_list.c fbxparse.c -o fbxparse -g -Lzlib/lib -Izlib/include -lz 
 
 #include <stdlib.h>
@@ -187,7 +196,7 @@ void visit_prop(char *buf, int *start_idx, ListNode **attr_list_head) {
     *start_idx = idx;
 }
 
-int print_node(char *buf, int start_idx, ListNode **attr_list) {
+int visit_node(char *buf, int start_idx, ListNode **attr_list) {
     uint32_t end_offset;
     uint32_t num_props;
     uint32_t prop_list_len;
@@ -230,7 +239,7 @@ int print_node(char *buf, int start_idx, ListNode **attr_list) {
         return curr_pos;
 
     while ( curr_pos+13 <  end_offset ) {
-        curr_pos = print_node(buf, curr_pos, attr_list);
+        curr_pos = visit_node(buf, curr_pos, attr_list);
     }
     // pint(curr_pos);
     // pint(end_offset);
@@ -269,7 +278,7 @@ int main(int argc, char** argv) {
         ListNode *attribute_list = NULL;
         int pos = 27;
         while( pos < finfo.st_size-300 ) {
-            pos = print_node(fbuf, pos, &attribute_list);
+            pos = visit_node(fbuf, pos, &attribute_list);
         }
 
         // print loaded data
