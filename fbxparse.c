@@ -1,12 +1,3 @@
-/* 
-    By Austin Bobco 9/22/2020
-
-    Written using info from this article
-    https://code.blender.org/2013/08/fbx-binary-file-format-specification/
-
-    WIP
-*/
-
 // gcc linked_list.c fbxparse.c -o fbxparse -g -Lzlib/lib -Izlib/include -lz 
 /* 
     By Austin Bobco 9/22/2020
