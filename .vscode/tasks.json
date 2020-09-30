@@ -1,0 +1,31 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "debug",
+      "type": "shell",
+      "command": "gdb  --args fbxparse.exe ./models/2objects.fbx"
+    },
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "gcc",
+      "args": [
+          "-g",
+          "fbxparse.c",
+          "-Izlib/include",
+          "-Lzlib/include",
+          "-lz",
+          "-o",
+          "fbxparse"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher":"$gcc"
+      }
+  ]
+}
